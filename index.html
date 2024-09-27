@@ -1,0 +1,448 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-image text-putih font-sans h-screen">
+    <audio
+      id="audioPlayer"
+      src="./sound/bg_sound.mp3"
+      preload="auto"
+      loop
+    ></audio>
+    <audio
+      id="audioPlayer2"
+      src="./sound/bg_sound2.mp3"
+      preload="auto"
+      loop
+    ></audio>
+    <audio
+      id="audioPlayer3"
+      src="./sound/bg_sound3.mp3"
+      preload="auto"
+      loop
+    ></audio>
+    <div id="modalPopup" class="modal hidden">
+      <div class="line-scroll"></div>
+      <div class="modal-content">
+        <span id="closeModal" class="close-button-peringatan">&times;</span>
+        <div class="lock-icon">
+          <i class="fas fa-user-lock icon-privasi"></i>
+        </div>
+        <h2 style="font-weight: 500" class="title">
+          Chat dan panggilan Anda bersifat privat
+        </h2>
+        <p class="description">
+          Enkripsi end-to-end menjaga agar pesan dan panggilan pribadi Anda
+          hanya diketahui oleh Anda dan pengguna yang Anda pilih. Bahkan
+          WhatsApp tidak dapat membaca atau mendengarkannya. Ini termasuk:
+        </p>
+        <div class="list-item2">
+          <i class="fas fa-comments"></i>
+          <span>Pesan teks dan suara</span>
+        </div>
+        <div class="list-item2">
+          <i class="fas fa-phone"></i>
+          <span>Panggilan suara dan video</span>
+        </div>
+        <div class="list-item2">
+          <i class="fas fa-paperclip"></i>
+          <span>Foto, video, dan dokumen</span>
+        </div>
+        <div class="list-item2">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Berbagi lokasi</span>
+        </div>
+        <div <div class="list-item2">
+          <i class="fas fa-assistive-listening-systems"></i>
+          <span>Pembaruan status </span>
+        </div>
+        <div
+          class="flex items-center justify-center w-full p-2 rounded-full button-pelajari mt-8"
+        >
+          <a href="https://www.whatsapp.com/security/?lg=id" target="_blank"
+            >Pelajari Selengkapnya</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="h-full flex flex-col">
+      <div class="flex-grow flex flex-col">
+        <div class="fixed-top">
+          <!-- ALERT -->
+          <div
+            id="alertWarning"
+            class="hidden alert-warning text-yellow-700 p-2"
+          >
+            Matikan mode gelap HP anda terlebih dahulu saat menggunakan mode
+            terang.
+            <button onclick="closeAlert()" class="close-button">Close</button>
+          </div>
+          <!-- END ALERT -->
+          <div
+            class="flex items-center justify-between p-2 header text-xs text-gray-400"
+          >
+            <div class="flex items-center space-x-1">
+              <div class="space-x-1">
+                <span class="text-putih font-bold" id="currentTime"></span>
+                <span class="text-putih" id="dataUsage"></span>
+              </div>
+              <i class="text-lime-400 fab fa-whatsapp"></i>
+              <i class="text-putih fab fa-instagram"></i>
+              <i class="text-red-500 fab fa-youtube"></i>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="text-putih fas fa-signal" style="font-size: 0.6rem"></i>
+              <i class="text-putih fas fa-wifi" style="font-size: 0.6rem"></i>
+              <i class="fas fa-battery-full"></i>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-between p-4 header relative"
+            style="border-bottom: 0.1px solid white"
+          >
+            <div class="flex items-center">
+              <i
+                class="fas fa-arrow-left text-putih mr-4"
+                style="cursor: pointer"
+              ></i>
+              <div
+                class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center"
+              >
+                <!-- <i class="fas fa-user text-putih"></i> -->
+                <img
+                  src="./img/profil.jpeg"
+                  alt="profile"
+                  class="w-full h-full rounded-full"
+                />
+              </div>
+              <div class="ml-4">
+                <p class="text-putih font-bold">Emboiii</p>
+                <p class="text-putih text-xs" id="status">Online</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-6">
+              <i class="fas fa-video text-putih"></i>
+              <i class="fas fa-phone text-putih"></i>
+              <i
+                class="fas fa-ellipsis-v text-putih cursor-pointer"
+                onclick="toggleDropdown()"
+              ></i>
+              <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#">Lihat Kontak</a>
+                <a href="#">Media, tautan, dan dok</a>
+                <a href="#">Cari</a>
+                <a href="#">Bisukan Notifikasi</a>
+                <a href="#">Pesan Sementara</a>
+                <a href="#">Wallpaper</a>
+                <a href="#" class="more" onclick="showMoreDropdown(event)"
+                  >Lainnya</a
+                >
+              </div>
+              <div class="dropdown-menu" id="moreDropdown">
+                <a href="#">Laporkan</a>
+                <a href="#">Blokir</a>
+                <a href="#" onclick="cleanAllChats(event)">Bersihkan Chat</a>
+                <a href="#">Ekspor chat</a>
+                <a href="#">Tambah pintasan</a>
+                <a href="#" class="more" onclick="showMusicDropdown(event)"
+                  >Lainnya Lagi</a
+                >
+              </div>
+              <div class="dropdown-menu" id="musicDropdown">
+                <a href="#"> <button id="toggleAudio">Putar Lagu 1</button></a>
+                <a href="#"> <button id="toggleAudio2">Putar Lagu 2</button></a>
+                <a href="#"> <button id="toggleAudio3">Putar Lagu 3</button></a>
+                <a href="#">
+                  <button id="modeGelapTerang">Mode Gelap</button></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 overflow-y-auto flex-grow mt-16 mb-20">
+          <div class="flex justify-center mb-4 mt-9 tanggal-september">
+            <span
+              class="tanggal-hari teks-tanggal-hari text-xs py-1 px-2 rounded font-bold"
+              >12 September 2024</span
+            >
+          </div>
+          <div class="flex justify-center mb-4">
+            <div
+              class="peringatan text-gray-400 text-sm p-3 rounded-lg max-w-xs md:max-w-md lg:max-w-lg text-center"
+            >
+              <div class="teks-peringatan">
+                <i class="fas fa-unlock-alt" style="font-size: 0.6rem"></i>
+                Pesan dan panggilan dienkripsi secara end-to-end. Tidak seorang
+                pun di luar chat ini, termasuk WhatsApp, yang dapat membaca atau
+                mendengarkannya. Ketuk untuk info selengkapnya.
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left text-putih max-w-xs chat-time september-1"
+              data-time="1"
+              id="september-1"
+            >
+              <p>Assalamu'alaikum<br />Salken aku Emboiii</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div
+              class="chat-bubble chat-bubble-right text-putih max-w-xs chat-time with-check september-2"
+              data-time="1"
+              id="september-2"
+            >
+              <p>Salken juga kak</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-center mb-4 mt-9">
+            <span
+              class="tanggal-hari teks-tanggal-hari text-xs py-1 px-2 rounded font-bold hari-ini"
+              >Hari ini</span
+            >
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-1"
+              data-time="1"
+              id="sequence-1"
+            >
+              <p>Hai assalamu'alaikum</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div
+              class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-2"
+              data-time="1"
+              id="sequence-2"
+            >
+              <p>Waalaikumsalam mas</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-3"
+              data-time="1"
+              id="sequence-3"
+            >
+              <p>Hai kamu apa kabar?</p>
+              <p>Sehat sehat aja kan?</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div
+              class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-4"
+              data-time="1"
+              id="sequence-4"
+            >
+              <p>Iyaa sehat2 aja kok mas</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div
+              class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-5"
+              data-time="1"
+              id="sequence-5"
+            >
+              <p>Tumben mas ngechat</p>
+              <p>Ada perihal apa ya??</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-6"
+              data-time="1"
+              id="sequence-6"
+            >
+              <p>Aduuh to the point<br />banget ya kamutuh 😅</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div
+              class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-7"
+              data-time="1"
+              id="sequence-7"
+            >
+              <p>Iyaa dong mas biar gak kelamaan</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-8"
+              data-time="1"
+              id="sequence-8"
+            >
+              <p>Aku itu mau tanya...</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-9"
+              data-time="1"
+              id="sequence-9"
+            >
+              <p>Sebenarnya kita itu apa si?</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div
+              class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-10"
+              data-time="1"
+              id="sequence-10"
+            >
+              <p>Kita adalah manusia</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-11"
+              data-time="1"
+              id="sequence-11"
+            >
+              <p>Maksudku hubungan<br />Hubungan kita itu apa sih?</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-end mb-4">
+            <div
+              class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-12"
+              data-time="1"
+              id="sequence-12"
+            >
+              <p>Ohhh Hablum Minannas</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+          <div class="flex justify-start mb-4">
+            <div
+              class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-13"
+              data-time="1"
+              id="sequence-13"
+            >
+              <p>🥲😓😭</p>
+              <span class="text-xs text-gray-400 block text-right"></span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="p-3 ketik-pesan flex items-center fixed-bottom"
+          style="border-top: 2px solid #110303"
+        >
+          <div class="flex items-center textarea-ketik rounded-lg w-full p-2">
+            <i class="far fa-smile text-putih ml-2"></i>
+            <textarea
+              class="textarea-ketik text-putih p-2 rounded-lg flex-grow mx-2"
+              placeholder="Ketik pesan"
+              rows="1"
+              oninput="autoResize(this)"
+              style="height: 40px"
+            ></textarea>
+            <i
+              class="fas fa-paperclip text-putih mr-2"
+              id="paperclipIcon"
+              style="cursor: pointer"
+            ></i>
+            <i class="fas fa-camera text-putih mr-2" id="cameraIcon"></i>
+          </div>
+          <div class="ml-2 flex-shrink-0">
+            <div
+              class="w-10 h-10 mic-send rounded-full flex items-center justify-center"
+              id="micOrSendIcon"
+              style="cursor: pointer"
+            >
+              <i class="fas fa-microphone text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <i
+      class="fas fa-angle-double-down rounded-full w-8 h-8 flex items-center justify-center gulir mr-4"
+      id="scrollToBottom"
+      style="
+        cursor: pointer;
+        position: fixed;
+        bottom: 90px;
+        right: 0px;
+        color: #8e989a;
+        font-size: 0.6rem;
+      "
+    ></i>
+    <div id="popup" class="popup hidden">
+      <div class="popup-content">
+        <div class="popup-grid">
+          <div class="popup-item">
+            <div class="icon-container bg-blue-500">
+              <i class="fas fa-file-alt"></i>
+            </div>
+            <p>Dokumen</p>
+          </div>
+          <div class="popup-item">
+            <div class="icon-container bg-green-500">
+              <i class="fas fa-camera"></i>
+            </div>
+            <p>Kamera</p>
+          </div>
+          <div class="popup-item">
+            <div class="icon-container bg-red-500">
+              <i class="fas fa-image"></i>
+            </div>
+            <p>Galeri</p>
+          </div>
+          <div class="popup-item">
+            <div class="icon-container bg-yellow-500">
+              <i class="fas fa-microphone"></i>
+            </div>
+            <p>Audio</p>
+          </div>
+          <div class="popup-item">
+            <div class="icon-container bg-purple-500">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <p>Lokasi</p>
+          </div>
+          <div class="popup-item">
+            <div class="icon-container bg-orange-500">
+              <i class="fas fa-address-book"></i>
+            </div>
+            <p>Kontak</p>
+          </div>
+          <div class="popup-item">
+            <div class="icon-container bg-teal-500">
+              <i class="fas fa-poll"></i>
+            </div>
+            <p>Polling</p>
+          </div>
+          <div class="popup-item">
+            <div class="icon-container bg-gray-500">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <p>Acara</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
