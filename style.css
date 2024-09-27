@@ -1,0 +1,470 @@
+:root {
+  --text-putih: #ffffff;
+  --text-gray-400: rgb(156 163 175); /* Warna untuk mode malam */
+  --bg-dark: #121b22;
+  --bg-light: #ffffff;
+  --bg-gray: #2a2f32;
+  --bg-bubble-left: #212e36;
+  --bg-bubble-right: #005c4b;
+  --bg-alert: #212e36;
+  --bg-header: #121b22;
+  --bg-ketik-pesan: #2a2f32;
+  --bg-textarea-ketik: #3b4a54;
+  --bg-mic-send: #00a884;
+  --bg-gulir: #283337;
+  --bg-teks-peringatan: #fcd34d;
+  --bg-tanggal-hari: #212e36;
+  --bg-teks-tanggal-hari: #9ca3af;
+  --bg-fa-battery-full: #ecfccb;
+  --bg-modal: #0b141b;
+  --bg-button-pelajari: #21c063;
+  --bg-title: #f9fcfc;
+  --bg-lock-icon: #f9fcfc;
+  --bg-image-dark: url("img/bg_gelap.jpeg");
+  --bg-image-light: url("img/bg_terang.jpeg");
+  --bubble-after-left: linear-gradient(
+    223deg,
+    #212e36 0%,
+    #212e36 50%,
+    transparent 50%,
+    transparent
+  );
+  --bubble-after-right: linear-gradient(
+    135deg,
+    #005c4b 0%,
+    #005c4b 50%,
+    transparent 50%,
+    transparent
+  );
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-putih);
+}
+
+.text-putih {
+  color: var(--text-putih);
+}
+
+.text-gray-400 {
+  color: var(--text-gray-400);
+}
+
+.header {
+  background-color: var(--bg-header);
+}
+
+.chat-bubble {
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.chat-bubble-left {
+  background-color: var(--bg-bubble-left);
+}
+
+.chat-bubble-right {
+  background-color: var(--bg-bubble-right);
+}
+
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.chat-bubble-left::after {
+  left: -10px;
+  background: var(--bubble-after-left);
+}
+
+.chat-bubble-right::after {
+  right: -10px;
+  background: var(--bubble-after-right);
+}
+
+.peringatan {
+  background-color: var(--bg-alert);
+}
+
+.ketik-pesan {
+  background-color: var(--bg-ketik-pesan);
+}
+
+.textarea-ketik {
+  background-color: var(--bg-textarea-ketik);
+}
+
+.mic-send {
+  background-color: var(--bg-mic-send);
+}
+
+.gulir {
+  background-color: var(--bg-gulir);
+}
+
+.teks-peringatan {
+  color: var(--bg-teks-peringatan);
+}
+
+.tanggal-hari {
+  background-color: var(--bg-tanggal-hari);
+}
+
+.teks-tanggal-hari {
+  color: var(--bg-teks-tanggal-hari);
+}
+
+.fa-battery-full {
+  color: var(--bg-fa-battery-full);
+}
+/* body {
+  margin: 0;
+  height: 100vh;
+} */
+.bg-image {
+  background-image: var(--bg-image-dark);
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
+.hidden {
+  display: none;
+}
+#searchInput {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.chat-bubble-kemarin {
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+}
+.chat-bubble-kemarin::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, transparent 50%, #2a2f32 50%);
+}
+/* .chat-bubble {
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+}
+.chat-bubble::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, transparent 50%, #2a2f32 50%);
+}
+.chat-bubble-left::after {
+  left: -10px;
+  background: linear-gradient(
+    223deg,
+    #212e36 0%,
+    #212e36 50%,
+    transparent 50%,
+    transparent
+  );
+}
+.chat-bubble-right::after {
+  right: -10px;
+  background: linear-gradient(
+    135deg,
+    #005c4b 0%,
+    #005c4b 50%,
+    transparent 50%,
+    transparent
+  );
+} */
+.fixed-top {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: 10;
+}
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 100%;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #2a2f32;
+  color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 20;
+}
+.dropdown-menu.active {
+  display: block;
+}
+.dropdown-menu a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+}
+.dropdown-menu a:hover {
+  background-color: #3b4a54;
+}
+.dropdown-menu .more::after {
+  content: "\f0da";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: gray;
+}
+textarea {
+  resize: none;
+  overflow: hidden;
+}
+
+.popup {
+  position: fixed;
+  bottom: 100px; /* Jarak dari area input pesan */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #121b22;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 90%; /* Sesuaikan lebar popup */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 30;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.popup-item {
+  text-align: center;
+  display: flex; /* Tambahkan ini */
+  flex-direction: column; /* Tambahkan ini */
+  align-items: center; /* Tambahkan ini */
+}
+
+.icon-container {
+  background: linear-gradient(to bottom, #745de9 50%, #7f66ff 50%);
+  color: white;
+  border-radius: 50%;
+  padding: 10px; /* Ubah dari 20px menjadi 10px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem; /* Ubah dari 1.5rem menjadi 1rem */
+  width: 40px; /* Tambahkan lebar untuk menjaga konsistensi ukuran */
+  height: 40px; /* Tambahkan tinggi untuk menjaga konsistensi ukuran */
+}
+
+.icon-container.bg-blue-500 {
+  background: linear-gradient(to bottom, #745de9 50%, #7f66ff 50%);
+}
+
+.icon-container.bg-green-500 {
+  background: linear-gradient(to bottom, #e82b6d 50%, #fd2e74 50%);
+}
+.icon-container.bg-red-500 {
+  background: linear-gradient(to bottom, #b659e5 50%, #c860fd 50%);
+}
+.icon-container.bg-yellow-500 {
+  background: linear-gradient(to bottom, #e45d30 50%, #f96633 50%);
+}
+.icon-container.bg-purple-500 {
+  background: linear-gradient(to bottom, #1d9950 50%, #18ad62 50%);
+}
+.icon-container.bg-orange-500 {
+  background: linear-gradient(to bottom, #0090cf 50%, #009de0 50%);
+}
+.icon-container.bg-teal-500 {
+  background: linear-gradient(to bottom, #02988c 50%, #03a598 50%);
+}
+.icon-container.bg-gray-500 {
+  background: linear-gradient(to bottom, #e82b6d 50%, #fc2d76 50%);
+}
+
+.popup-item p {
+  margin-top: 5px;
+  font-size: 0.6rem;
+  color: #90999e;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.alert-warning {
+  position: fixed;
+  top: -100px; /* Mulai di luar layar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  transition: top 0.5s ease; /* Animasi transisi */
+  background-color: #ffeb3b; /* Warna kuning untuk alert */
+  padding: 10px; /* Tambahkan padding */
+}
+
+.alert-warning.show {
+  top: 10px; /* Posisi akhir di bawah */
+}
+
+.alert-warning.hidden {
+  top: -100px; /* Reset posisi ke luar layar */
+}
+
+.close-button {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal {
+  position: fixed;
+  top: 205;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-modal); /* Warna latar belakang */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Posisi di atas */
+  z-index: 1000; /* Pastikan modal di atas elemen lain */
+  animation: slideIn 0.3s; /* Animasi jika diperlukan */
+  border-radius: 35px;
+}
+
+.modal-content {
+  background-color: var(--bg-modal); /* Warna konten modal */
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%; /* Lebar konten modal */
+  max-width: 500px; /* Lebar maksimum konten modal */
+  margin-top: 5%; /* Jarak dari atas 10% */
+  position: relative;
+  color: white; /* Warna teks */
+  text-align: center; /* Teks di tengah */
+}
+
+.close-button-peringatan {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.5rem;
+  color: var(--bg-title); /* Warna tombol close */
+  cursor: pointer;
+}
+
+.title {
+  color: var(--bg-title);
+}
+.lock-icon {
+  font-size: 2.5rem; /* Ukuran icon kunci */
+  margin-bottom: 10px; /* Jarak antara icon dan judul */
+  color: var(--bg-lock-icon);
+}
+
+.description {
+  color: #7b8489; /* Warna deskripsi */
+  text-align: center; /* Rata tengah */
+  margin: 10px 0; /* Jarak atas dan bawah */
+  font-size: 0.8rem;
+}
+
+.button-pelajari {
+  font-weight: 600;
+  font-size: 0.8rem;
+  background-color: var(--bg-button-pelajari);
+  color: var(--bg-modal);
+  text-align: center;
+}
+.list-item2 {
+  color: #7b8489; /* Warna deskripsi */
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center; /* Vertikal rata tengah */
+  margin: 5px 0; /* Jarak antara item */
+  text-align: left; /* Rata kiri */
+}
+
+.list-item2 i {
+  margin-right: 10px; /* Jarak antara icon dan teks */
+}
+
+.line-scroll {
+  position: absolute;
+  top: 10px; /* Jarak dari atas modal */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px; /* Lebar garis scroll */
+  height: 5px; /* Tinggi garis scroll */
+  background-color: #ccc; /* Warna garis scroll */
+  border-radius: 2.5px; /* Sudut yang melengkung */
+  z-index: 1; /* Pastikan garis di atas konten modal */
+  cursor: grab; /* Ganti cursor saat di-hover */
+}
+
+/* Menambahkan efek saat dragging */
+.line-scroll:active {
+  cursor: grabbing; /* Ganti cursor saat di-drag */
+}
+
+#modalPopup {
+  overflow-y: auto; /* Enable vertical scroll */
+  max-height: 80vh; /* Atur tinggi maksimum */
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.slide-out {
+  animation: slideOut 0.3s forwards; /* Memastikan animasi berjalan */
+}
