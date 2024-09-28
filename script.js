@@ -1,3 +1,81 @@
+// WIFI
+const wifiIcons = ["wifi1", "wifi2", "wifi3", "wifiOff"];
+
+function showRandomWifi() {
+  // Sembunyikan semua ikon
+  wifiIcons.forEach((id) => {
+    document.getElementById(id).classList.add("hidden");
+  });
+
+  // Pilih secara acak salah satu ikon
+  const randomIndex = Math.floor(Math.random() * wifiIcons.length);
+  const selectedWifi = wifiIcons[randomIndex];
+
+  // Tampilkan ikon yang dipilih
+  document.getElementById(selectedWifi).classList.remove("hidden");
+}
+
+// Ganti ikon setiap 2 detik
+setInterval(showRandomWifi, 2000);
+
+// END WIFI
+
+// SIGNAL
+const signalIcons = ["signal1", "signal2", "signalFull"];
+
+// Fungsi untuk menampilkan sinyal secara acak
+function showRandomSignal() {
+  // Sembunyikan semua ikon
+  signalIcons.forEach((id) => {
+    document.getElementById(id).classList.add("hidden");
+  });
+
+  // Pilih secara acak salah satu ikon
+  const randomIndex = Math.floor(Math.random() * signalIcons.length);
+  const selectedSignal = signalIcons[randomIndex];
+
+  // Tampilkan ikon yang dipilih
+  document.getElementById(selectedSignal).classList.remove("hidden");
+}
+
+// Ganti ikon setiap 2 detik
+setInterval(showRandomSignal, 2000);
+
+// END SIGNAL
+
+// BATTERY
+const batteryIcons = [
+  "battery-charging-full",
+  "battery-charging-20",
+  "battery-charging-50",
+  "battery-charging-60",
+  "battery-charging-80",
+  "battery-charging-90",
+  "battery-full",
+];
+
+// Fungsi untuk menampilkan status baterai secara berurutan
+let index = 0;
+
+function showBatteryCharge() {
+  // Sembunyikan semua ikon
+  batteryIcons.forEach((id) => {
+    document.getElementById(id).classList.add("hidden");
+  });
+
+  // Tampilkan ikon berdasarkan index
+  document.getElementById(batteryIcons[index]).classList.remove("hidden");
+
+  // Update index untuk ikon berikutnya
+  index = (index + 1) % batteryIcons.length; // Kembali ke 0 setelah terakhir
+}
+
+// Ganti ikon setiap 2 detik
+setInterval(showBatteryCharge, 2000);
+
+// Tampilkan status baterai awal
+showBatteryCharge();
+// END BATTERY
 const audioPlayer = document.getElementById("audioPlayer");
 const audioPlayer2 = document.getElementById("audioPlayer2");
 const audioPlayer3 = document.getElementById("audioPlayer3");
@@ -66,6 +144,10 @@ function toggleMode() {
     document.documentElement.style.setProperty("--bg-lock-icon", "#25d367");
     document.documentElement.style.setProperty("--bg-dropdown-menu", "#fff");
     document.documentElement.style.setProperty(
+      "--bg-ketik-pesan-border",
+      "#fff"
+    );
+    document.documentElement.style.setProperty(
       "--bg-dropdown-menu-hover",
       "#dde4e8"
     );
@@ -75,6 +157,10 @@ function toggleMode() {
     );
     document.documentElement.style.setProperty(
       "--bg-fa-battery-full",
+      "#F59E0B"
+    );
+    document.documentElement.style.setProperty(
+      "--bg-animation-battery",
       "#F59E0B"
     );
     document.documentElement.style.setProperty(
@@ -122,7 +208,11 @@ function toggleMode() {
     document.documentElement.style.setProperty("--bg-modal", "#0b141b");
     document.documentElement.style.setProperty("--bg-title", "#f9fcfc");
     document.documentElement.style.setProperty("--bg-lock-icon", "#f9fcfc");
-    document.documentElement.style.setProperty("--bg-dropdown-menu", "#2a2f32");
+    document.documentElement.style.setProperty("--bg-dropdown-menu", "#110303");
+    document.documentElement.style.setProperty(
+      "--bg-ketik-pesan-border",
+      "#2a2f32"
+    );
     document.documentElement.style.setProperty(
       "--bg-dropdown-menu-hover",
       "#3b4a54"
@@ -133,6 +223,10 @@ function toggleMode() {
     );
     document.documentElement.style.setProperty(
       "--bg-fa-battery-full",
+      "#ECFCCB"
+    );
+    document.documentElement.style.setProperty(
+      "--bg-animation-battery",
       "#ECFCCB"
     );
     document.documentElement.style.setProperty(
