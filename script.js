@@ -120,7 +120,7 @@ function toggleMode() {
     document.documentElement.style.setProperty("--bg-gulir", "#283337");
     document.documentElement.style.setProperty("--bg-tanggal-hari", "#212e36");
     document.documentElement.style.setProperty("--bg-modal", "#0b141b");
-    document.documentElement.style.setProperty("--bg-title", "#0b141b");
+    document.documentElement.style.setProperty("--bg-title", "#f9fcfc");
     document.documentElement.style.setProperty("--bg-lock-icon", "#f9fcfc");
     document.documentElement.style.setProperty("--bg-dropdown-menu", "#2a2f32");
     document.documentElement.style.setProperty(
