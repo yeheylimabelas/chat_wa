@@ -1,49 +1,69 @@
-// WIFI
-const wifiIcons = ["wifi1", "wifi2", "wifi3", "wifiOff"];
+/*** Tampilan Jam Menit Detik Mulai */
+function updateTime() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById(
+    "currentTime"
+  ).textContent = `${hours}:${minutes}:${seconds}`;
+}
+/*** Tampilan Jam Menit Detik Selesai ***/
 
-function showRandomWifi() {
-  // Sembunyikan semua ikon
-  wifiIcons.forEach((id) => {
-    document.getElementById(id).classList.add("hidden");
-  });
-
-  // Pilih secara acak salah satu ikon
-  const randomIndex = Math.floor(Math.random() * wifiIcons.length);
-  const selectedWifi = wifiIcons[randomIndex];
-
-  // Tampilkan ikon yang dipilih
-  document.getElementById(selectedWifi).classList.remove("hidden");
+/*** Tampilan Terakhir Dilihat Mulai ***/
+function getLastSeenTime() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  return `Terakhir dilihat ${hours}:${minutes}`;
 }
 
-// Ganti ikon setiap 2 detik
-setInterval(showRandomWifi, 2000);
-
-// END WIFI
-
-// SIGNAL
-const signalIcons = ["signal1", "signal2", "signalFull"];
-
-// Fungsi untuk menampilkan sinyal secara acak
-function showRandomSignal() {
-  // Sembunyikan semua ikon
-  signalIcons.forEach((id) => {
-    document.getElementById(id).classList.add("hidden");
-  });
-
-  // Pilih secara acak salah satu ikon
-  const randomIndex = Math.floor(Math.random() * signalIcons.length);
-  const selectedSignal = signalIcons[randomIndex];
-
-  // Tampilkan ikon yang dipilih
-  document.getElementById(selectedSignal).classList.remove("hidden");
+function updateStatus() {
+  const statusElement = document.querySelector("#status");
+  statusElement.textContent = "Online";
+  setTimeout(() => {
+    statusElement.textContent = getLastSeenTime();
+    setTimeout(updateStatus, Math.random() * (8000 - 7000) + 7000); // 2-5 detik
+  }, Math.random() * (9000 - 7000) + 7000); // 2-5 detik
 }
 
-// Ganti ikon setiap 2 detik
-setInterval(showRandomSignal, 2000);
+document.addEventListener("DOMContentLoaded", function () {
+  updateStatus();
+});
+/*** Tampilan Terakhir Dilihat Selesai ***/
 
-// END SIGNAL
+/*** Tampilan Data Usage Mulai ***/
+function updateDataUsage() {
+  const randomKB = (Math.random() * 10).toFixed(1);
+  document.getElementById("dataUsage").textContent = `${randomKB}KB/d`;
+  const randomInterval = Math.floor(Math.random() * 5000) + 2000;
+  setTimeout(updateDataUsage, randomInterval);
+}
 
-// BATTERY
+setInterval(updateTime, 1000);
+updateTime();
+updateDataUsage();
+/*** Tampilan Data Usage Selesai ***/
+
+/*** Tampilkan Header Animasi Mulai ***/
+function showRandomIcons(iconIds, interval) {
+  setInterval(() => {
+    // Sembunyikan semua ikon
+    iconIds.forEach((id) => {
+      document.getElementById(id).classList.add("hidden");
+    });
+
+    // Pilih secara acak salah satu ikon
+    const randomIndex = Math.floor(Math.random() * iconIds.length);
+    const selectedIcon = iconIds[randomIndex];
+
+    // Tampilkan ikon yang dipilih
+    document.getElementById(selectedIcon).classList.remove("hidden");
+  }, interval);
+}
+
+showRandomIcons(["wifi1", "wifi2", "wifi3", "wifiOff"], 2000);
+showRandomIcons(["signal1", "signal2", "signalFull"], 2000);
 const batteryIcons = [
   "battery-charging-full",
   "battery-charging-20",
@@ -54,28 +74,106 @@ const batteryIcons = [
   "battery-full",
 ];
 
-// Fungsi untuk menampilkan status baterai secara berurutan
-let index = 0;
+let batteryIndex = 0;
 
-function showBatteryCharge() {
-  // Sembunyikan semua ikon
+setInterval(() => {
   batteryIcons.forEach((id) => {
     document.getElementById(id).classList.add("hidden");
   });
 
-  // Tampilkan ikon berdasarkan index
-  document.getElementById(batteryIcons[index]).classList.remove("hidden");
+  document
+    .getElementById(batteryIcons[batteryIndex])
+    .classList.remove("hidden");
 
-  // Update index untuk ikon berikutnya
-  index = (index + 1) % batteryIcons.length; // Kembali ke 0 setelah terakhir
+  batteryIndex = (batteryIndex + 1) % batteryIcons.length;
+}, 1000);
+
+document.getElementById(batteryIcons[0]).classList.remove("hidden");
+/*** Tampilan Header Animasi Selesai ***/
+
+/*** Pesan Whatsapp Mulai */
+const phoneNumber = "6281326561934";
+
+document.getElementById("videoIcon").addEventListener("click", function () {
+  const message = "Aku mau vc kamu";
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappLink, "_blank");
+});
+
+document.getElementById("phoneIcon").addEventListener("click", function () {
+  const message = "Aku mau teleponan sama kamu";
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappLink, "_blank");
+});
+/*** Pesan Whatsapp Selesai ***/
+
+/*** Tampilan Popup Pengaturan Mulai ***/
+function toggleDropdown() {
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const moreDropdown = document.getElementById("moreDropdown");
+  const musicDropdown = document.getElementById("musicDropdown");
+
+  if (dropdownMenu.classList.contains("active")) {
+    dropdownMenu.classList.remove("active");
+    moreDropdown.classList.remove("active");
+    musicDropdown.classList.remove("active");
+  } else {
+    dropdownMenu.classList.add("active");
+    moreDropdown.classList.remove("active");
+    musicDropdown.classList.remove("active");
+  }
 }
 
-// Ganti ikon setiap 2 detik
-setInterval(showBatteryCharge, 2000);
+function showMoreDropdown(event) {
+  event.preventDefault();
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const moreDropdown = document.getElementById("moreDropdown");
+  const musicDropdown = document.getElementById("musicDropdown");
 
-// Tampilkan status baterai awal
-showBatteryCharge();
-// END BATTERY
+  dropdownMenu.classList.remove("active");
+  moreDropdown.classList.add("active");
+  musicDropdown.classList.remove("active");
+}
+
+function showMusicDropdown(event) {
+  event.preventDefault();
+  const moreDropdown = document.getElementById("moreDropdown");
+  const musicDropdown = document.getElementById("musicDropdown");
+
+  moreDropdown.classList.remove("active");
+  musicDropdown.classList.add("active");
+}
+
+document.addEventListener("click", function (event) {
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const moreDropdown = document.getElementById("moreDropdown");
+  const musicDropdown = document.getElementById("musicDropdown");
+
+  if (event.target.matches(".fa-ellipsis-v")) {
+    return;
+  } else if (event.target.matches(".more")) {
+    if (event.target.textContent.includes("Lainnya Lagi")) {
+      showMusicDropdown(event);
+    } else {
+      showMoreDropdown(event);
+    }
+  } else if (
+    !dropdownMenu.contains(event.target) &&
+    !moreDropdown.contains(event.target) &&
+    !musicDropdown.contains(event.target)
+  ) {
+    dropdownMenu.classList.remove("active");
+    moreDropdown.classList.remove("active");
+    musicDropdown.classList.remove("active");
+  }
+});
+/*** Tampilan Popup Pengaturan Selesai ***/
+
+/*** Tampilan Audio Mulai ***/
 const audioPlayer = document.getElementById("audioPlayer");
 const audioPlayer2 = document.getElementById("audioPlayer2");
 const audioPlayer3 = document.getElementById("audioPlayer3");
@@ -84,13 +182,11 @@ const toggleAudioButton = document.getElementById("toggleAudio");
 const toggleAudioButton2 = document.getElementById("toggleAudio2");
 const toggleAudioButton3 = document.getElementById("toggleAudio3");
 
-let currentAudio = null; // Menyimpan audio yang sedang diputar
+let currentAudio = null;
 
 function playAudio(audio, button, buttonText) {
   if (currentAudio && currentAudio !== audio) {
     currentAudio.pause();
-    currentAudio.currentTime = 0; // Reset waktu ke awal
-    // Ubah teks tombol yang sedang aktif
     if (currentAudio === audioPlayer) {
       toggleAudioButton.textContent = "Putar Lagu 1";
     } else if (currentAudio === audioPlayer2) {
@@ -102,18 +198,32 @@ function playAudio(audio, button, buttonText) {
 
   if (audio.paused) {
     audio.play();
-    button.textContent = buttonText; // Ubah teks tombol
-    currentAudio = audio; // Set audio yang sedang aktif
+    button.textContent = buttonText;
+    currentAudio = audio;
   } else {
     audio.pause();
-    audio.currentTime = 0; // Reset waktu ke awal
-    button.textContent = `Putar Lagu ${buttonText.split(" ")[2]}`; // Ubah kembali teks tombol
-    currentAudio = null; // Reset audio yang sedang aktif
+    button.textContent = `Putar Lagu ${buttonText.split(" ")[2]}`;
+    currentAudio = null;
   }
 }
 
-let isDarkMode = true; // Awalnya, mode malam aktif
-let isFirstTimeUsingLightMode = true; // Menandakan apakah ini penggunaan pertama mode terang
+toggleAudioButton.addEventListener("click", function () {
+  playAudio(audioPlayer, toggleAudioButton, "Matikan Lagu 1");
+});
+
+toggleAudioButton2.addEventListener("click", function () {
+  playAudio(audioPlayer2, toggleAudioButton2, "Matikan Lagu 2");
+});
+
+toggleAudioButton3.addEventListener("click", function () {
+  playAudio(audioPlayer3, toggleAudioButton3, "Matikan Lagu 3");
+});
+
+/*** Tampilan Audio Selesai ***/
+
+/*** Tampilan Mode Gelap Terang Mulai ***/
+let isDarkMode = true;
+let isFirstTimeUsingLightMode = true;
 
 function toggleMode() {
   const body = document.body;
@@ -179,15 +289,14 @@ function toggleMode() {
     body.style.backgroundImage = "var(--bg-image-light)";
 
     if (isFirstTimeUsingLightMode) {
-      alertWarning.classList.remove("hidden"); // Tampilkan alert
+      alertWarning.classList.remove("hidden");
       setTimeout(() => {
-        alertWarning.classList.add("show"); // Tambahkan kelas show setelah sedikit delay untuk animasi
-      }, 10); // Delay singkat untuk memastikan animasi berjalan
-      isFirstTimeUsingLightMode = false; // Set flag jadi false setelah pertama kali ditampilkan
-      // Menutup alert otomatis setelah 4 detik
+        alertWarning.classList.add("show");
+      }, 10);
+      isFirstTimeUsingLightMode = false;
       setTimeout(() => {
         closeAlert();
-      }, 4000); // 4000 ms = 4 detik
+      }, 4000);
     }
 
     toggleButton.innerText = "Mode Terang";
@@ -208,7 +317,7 @@ function toggleMode() {
     document.documentElement.style.setProperty("--bg-modal", "#0b141b");
     document.documentElement.style.setProperty("--bg-title", "#f9fcfc");
     document.documentElement.style.setProperty("--bg-lock-icon", "#f9fcfc");
-    document.documentElement.style.setProperty("--bg-dropdown-menu", "#110303");
+    document.documentElement.style.setProperty("--bg-dropdown-menu", "#2a2f32");
     document.documentElement.style.setProperty(
       "--bg-ketik-pesan-border",
       "#2a2f32"
@@ -259,52 +368,38 @@ function toggleMode() {
 
 function closeAlert() {
   const alertWarning = document.getElementById("alertWarning");
-  alertWarning.classList.remove("show"); // Hapus kelas show untuk menghilangkan animasi
+  alertWarning.classList.remove("show");
 
-  // Sembunyikan alert setelah animasi selesai
   setTimeout(() => {
     alertWarning.classList.add("hidden");
-  }, 500); // Tunggu 500ms untuk menyembunyikan setelah animasi selesai
+  }, 500);
 }
 
-// Tambahkan event listener untuk tombol
 document
   .getElementById("modeGelapTerang")
   .addEventListener("click", toggleMode);
+/*** Tampilan Mode Gelap Terang Selesai ***/
 
-toggleAudioButton.addEventListener("click", function () {
-  playAudio(audioPlayer, toggleAudioButton, "Matikan Lagu 1");
-});
-
-toggleAudioButton2.addEventListener("click", function () {
-  playAudio(audioPlayer2, toggleAudioButton2, "Matikan Lagu 2");
-});
-
-toggleAudioButton3.addEventListener("click", function () {
-  playAudio(audioPlayer3, toggleAudioButton3, "Matikan Lagu 3");
-});
-
+/*** Tampilan Popup Peringatan Privasi ***/
 document.querySelector(".peringatan").addEventListener("click", function () {
   const modal = document.getElementById("modalPopup");
   const modalContent = modal.querySelector(".modal-content");
   modal.classList.remove("hidden");
-  modalContent.classList.add("show"); // Tampilkan modal dengan animasi
+  modalContent.classList.add("show");
 });
 
 document.getElementById("closeModal").addEventListener("click", function () {
   const modal = document.getElementById("modalPopup");
   const modalContent = modal.querySelector(".modal-content");
-  modalContent.classList.add("slide-out"); // Tambahkan animasi penutupan
+  modalContent.classList.add("slide-out");
 
-  // Sembunyikan modal setelah animasi selesai
   setTimeout(() => {
     modal.classList.add("hidden");
     modalContent.classList.remove("slide-out");
-    modalContent.classList.remove("show"); // Reset kelas
-  }, 300); // Durasi animasi sama dengan CSS
+    modalContent.classList.remove("show");
+  }, 300);
 });
 
-// Sembunyikan modal jika pengguna mengklik di luar konten modal
 window.addEventListener("click", function (event) {
   const modal = document.getElementById("modalPopup");
   if (event.target === modal) {
@@ -326,162 +421,65 @@ let scrollTop;
 lineScroll.addEventListener("mousedown", (e) => {
   isDragging = true;
   startY = e.pageY - lineScroll.offsetTop;
-  scrollTop = document.getElementById("modalPopup").scrollTop; // Ambil posisi scroll saat ini
+  scrollTop = document.getElementById("modalPopup").scrollTop;
 });
 
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
   e.preventDefault();
   const y = e.pageY - lineScroll.offsetTop;
-  const walk = (y - startY) * 2; // Scroll fast
-  document.getElementById("modalPopup").scrollTop = scrollTop - walk; // Scroll modal
+  const walk = (y - startY) * 2;
+  document.getElementById("modalPopup").scrollTop = scrollTop - walk;
 });
 
 document.addEventListener("mouseup", () => {
   if (isDragging) {
     isDragging = false;
-    // Close modal if scrolled out of view
     const modal = document.getElementById("modalPopup");
     if (modal.scrollTop <= 0) {
       modal.classList.add("hidden");
     }
   }
 });
+/*** Tampilan Popup Peringatan Privasi Selesai ***/
 
-function getLastSeenTime() {
-  const now = new Date();
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  return `Terakhir dilihat ${hours}:${minutes}`;
+/*** Tampilan Chat Dimulai ***/
+function hideAllChats() {
+  const chatBubbles = document.querySelectorAll(".hilang");
+  chatBubbles.forEach((bubble) => bubble.classList.add("hidden"));
 }
 
-function updateStatus() {
-  const statusElement = document.querySelector("#status");
-  statusElement.textContent = "Online";
-  setTimeout(() => {
-    statusElement.textContent = getLastSeenTime();
-    setTimeout(updateStatus, Math.random() * (8000 - 7000) + 7000); // 2-5 detik
-  }, Math.random() * (9000 - 7000) + 7000); // 2-5 detik
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  updateStatus(); // Mulai proses saat DOM siap
-});
-
-function updateTime() {
-  const now = new Date();
-  const hours = String(now.getHours()).padStart(2, "0");
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  const seconds = String(now.getSeconds()).padStart(2, "0");
-  document.getElementById(
-    "currentTime"
-  ).textContent = `${hours}:${minutes}:${seconds}`;
-}
-function toggleDropdown() {
-  const dropdownMenu = document.getElementById("dropdownMenu");
-  const moreDropdown = document.getElementById("moreDropdown");
-  const musicDropdown = document.getElementById("musicDropdown");
-
-  if (dropdownMenu.classList.contains("active")) {
-    dropdownMenu.classList.remove("active");
-    moreDropdown.classList.remove("active");
-    musicDropdown.classList.remove("active");
+function autoResize(textarea) {
+  textarea.style.height = "auto";
+  const maxHeight = 5 * 24;
+  if (textarea.scrollHeight <= maxHeight) {
+    textarea.style.height = textarea.scrollHeight + "px";
   } else {
-    dropdownMenu.classList.add("active");
-    moreDropdown.classList.remove("active");
-    musicDropdown.classList.remove("active");
+    textarea.style.height = maxHeight + "px";
   }
-}
 
-function showMoreDropdown(event) {
-  event.preventDefault();
-  const dropdownMenu = document.getElementById("dropdownMenu");
-  const moreDropdown = document.getElementById("moreDropdown");
-  const musicDropdown = document.getElementById("musicDropdown");
+  const cameraIcon = document.getElementById("cameraIcon");
+  const paperclipIcon = document.getElementById("paperclipIcon");
+  const micOrSendIcon = document.getElementById("micOrSendIcon");
+  const scrollToBottomIcon = document.getElementById("scrollToBottom");
 
-  dropdownMenu.classList.remove("active");
-  moreDropdown.classList.add("active");
-  musicDropdown.classList.remove("active");
-}
-
-function showMusicDropdown(event) {
-  event.preventDefault();
-  const moreDropdown = document.getElementById("moreDropdown");
-  const musicDropdown = document.getElementById("musicDropdown");
-
-  moreDropdown.classList.remove("active");
-  musicDropdown.classList.add("active");
-}
-
-document.addEventListener("click", function (event) {
-  const dropdownMenu = document.getElementById("dropdownMenu");
-  const moreDropdown = document.getElementById("moreDropdown");
-  const musicDropdown = document.getElementById("musicDropdown");
-
-  if (event.target.matches(".fa-ellipsis-v")) {
-    return;
-  } else if (event.target.matches(".more")) {
-    if (event.target.textContent.includes("Lainnya Lagi")) {
-      showMusicDropdown(event);
-    } else {
-      showMoreDropdown(event);
-    }
-  } else if (
-    !dropdownMenu.contains(event.target) &&
-    !moreDropdown.contains(event.target) &&
-    !musicDropdown.contains(event.target)
-  ) {
-    dropdownMenu.classList.remove("active");
-    moreDropdown.classList.remove("active");
-    musicDropdown.classList.remove("active");
+  if (textarea.value.length > 0) {
+    cameraIcon.style.display = "none";
+    micOrSendIcon.innerHTML = '<i class="fas fa-paper-plane text-white"></i>';
+  } else {
+    cameraIcon.style.display = "inline";
+    micOrSendIcon.innerHTML = '<i class="fas fa-microphone text-white"></i>';
   }
+
+  const textareaHeight = textarea.offsetHeight;
+  scrollToBottomIcon.style.bottom = `${50 + textareaHeight}px`;
+}
+
+const textarea = document.querySelector("textarea");
+textarea.addEventListener("input", function () {
+  autoResize(textarea);
 });
 
-// function setChatTime(bubble, isReceived) {
-//   const timeElement = bubble.querySelector("span");
-//   const now = new Date();
-//   const timeString = `${String(now.getHours()).padStart(2, "0")}:${String(
-//     now.getMinutes()
-//   ).padStart(2, "0")}`;
-
-//   if (timeElement) {
-//     timeElement.innerHTML = `${timeString} ${
-//       isReceived
-//         ? '<i class="fas fa-check-double" style="font-size: 0.6rem;"></i>'
-//         : ""
-//     }`;
-//     if (isReceived) {
-//       bubble.classList.add("with-check"); // Tambahkan with-check untuk chat-right
-//     }
-//   }
-// }
-
-function updateDataUsage() {
-  const randomKB = (Math.random() * 10).toFixed(1);
-  document.getElementById("dataUsage").textContent = `${randomKB}KB/d`;
-  const randomInterval = Math.floor(Math.random() * 5000) + 2000;
-  setTimeout(updateDataUsage, randomInterval);
-}
-
-setInterval(updateTime, 1000);
-updateTime();
-updateDataUsage();
-
-document.getElementById("paperclipIcon").addEventListener("click", function () {
-  document.getElementById("popup").classList.toggle("hidden");
-});
-
-window.onclick = function (event) {
-  if (
-    event.target !== document.getElementById("paperclipIcon") &&
-    !event.target.closest("#popup") &&
-    !event.target.matches(".popup-item")
-  ) {
-    document.getElementById("popup").classList.add("hidden");
-  }
-};
-
-// Array untuk menyimpan semua chat sequence secara dinamis
 const chatSequence = [
   { id: "sequence-1", delay: 2000 },
   { id: "sequence-2", delay: 1000 },
@@ -499,37 +497,31 @@ const chatSequence = [
 ];
 
 let currentSequenceIndex = 0;
-let sequence2Visible = false;
-// let sequence7Visible = false;
 
 function playSound(isRightBubble) {
   const audio = new Audio(
     isRightBubble ? "./sound/sound_right.mp3" : "./sound/sound_left.mp3"
   );
 
-  // Coba untuk memutar audio dan tangani error jika tidak diizinkan
   audio.play().catch((error) => {
     console.error("Failed to play sound:", error);
   });
 }
 
-// Function to show chat bubble
 function showChatBubble(id, isRightBubble) {
   const chatBubble = document.getElementById(id);
   if (chatBubble) {
     chatBubble.classList.remove("hidden");
     setChatTime(chatBubble, isRightBubble);
-    playSound(isRightBubble); // Play sound when chat bubble appears
+    playSound(isRightBubble);
   }
 }
 
-// Function to start chat sequence
-// Tambahkan fungsi untuk men-disable/enable ikon mic/send
 function toggleMicSendIcon(disable) {
   const micOrSendIcon = document.getElementById("micOrSendIcon");
   if (disable) {
-    micOrSendIcon.classList.add("disabled"); // Menambahkan kelas disabled
-    micOrSendIcon.onclick = null; // Nonaktifkan event click
+    micOrSendIcon.classList.add("disabled");
+    micOrSendIcon.onclick = null;
   } else {
     micOrSendIcon.classList.remove("disabled");
   }
@@ -538,15 +530,15 @@ function toggleMicSendIcon(disable) {
 function typeWriter(textarea, text, index, callback) {
   if (index < text.length) {
     textarea.value += text.charAt(index);
-    autoResize(textarea); // Resize textarea setelah menambahkan karakter
+    autoResize(textarea);
     setTimeout(() => {
-      typeWriter(textarea, text, index + 1, callback); // Rekursif untuk karakter berikutnya
-    }, 100); // Delay antara setiap karakter
+      typeWriter(textarea, text, index + 1, callback);
+    }, 100);
   } else {
-    callback(); // Panggil callback setelah selesai mengetik
+    callback();
   }
 }
-// Modifikasi fungsi startChatSequence
+
 function startChatSequence() {
   if (currentSequenceIndex < chatSequence.length) {
     const { id, delay } = chatSequence[currentSequenceIndex];
@@ -563,45 +555,52 @@ function startChatSequence() {
       } else {
         // Sequence ini memerlukan input dari pengguna
         const textarea = document.querySelector("textarea");
-        textarea.value = ""; // Reset textarea
+        textarea.value = "";
 
-        toggleMicSendIcon(true); // Disable ikon mic/send
+        toggleMicSendIcon(true);
 
-        // Menentukan pesan untuk setiap sequence yang membutuhkan input
-        if (id === "sequence-2") {
-          textarea.value = "Waalaikumsalam mas";
-        } else if (id === "sequence-4") {
-          textarea.value = "Iyaa sehat2 aja kok mas";
-        } else if (id === "sequence-5") {
-          textarea.value = "Tumben mas ngechat \nAda perihal apa ya?";
-        } else if (id === "sequence-7") {
-          textarea.value = "Iyaa dong mas biar gak kelamaan";
-        } else if (id === "sequence-10") {
-          textarea.value = "Kita adalah manusia";
-        } else if (id === "sequence-12") {
-          textarea.value = "Ohhh hablum minan nas";
+        // if (id === "sequence-2") {
+        //   textarea.value = "Waalaikumsalam mas";
+        // } else if (id === "sequence-4") {
+        //   textarea.value = "Iyaa sehat2 aja kok mas";
+        // } else if (id === "sequence-5") {
+        //   textarea.value = "Tumben mas ngechat \nAda perihal apa ya?";
+        // } else if (id === "sequence-7") {
+        //   textarea.value = "Iyaa dong mas biar gak kelamaan";
+        // } else if (id === "sequence-10") {
+        //   textarea.value = "Kita adalah manusia";
+        // } else if (id === "sequence-12") {
+        //   textarea.value = "Ohhh hablum minan nas";
+        // }
+
+        const messageElement = document.getElementById(id);
+        const pElement = messageElement
+          ? messageElement.querySelector("p")
+          : null;
+        if (pElement) {
+          textarea.value = pElement.innerHTML.replace(/<br\s*\/?>/g, "\n");
         }
 
-        autoResize(textarea); // Resize textarea otomatis
+        autoResize(textarea);
 
-        // Mengatur event untuk ikon mic/send
         document.getElementById("micOrSendIcon").onclick = function () {
           if (textarea.value.trim() !== "") {
-            showChatBubble(id, true); // Tampilkan balon chat
+            showChatBubble(id, true);
             currentSequenceIndex++;
-            toggleMicSendIcon(true); // Disable ikon
+            toggleMicSendIcon(true);
             setTimeout(() => {
-              toggleMicSendIcon(false); // Enable ikon setelah delay
-              startChatSequence(); // Lanjutkan sequence
-            }, delay); // Sesuaikan delay jika diperlukan
-            textarea.value = ""; // Reset textarea
-            autoResize(textarea); // Resize textarea lagi
+              toggleMicSendIcon(false);
+              startChatSequence();
+            }, delay);
+            textarea.value = "";
+            autoResize(textarea);
           }
         };
       }
     }, delay);
   }
 }
+/*** Tampilan Chat Dimulai Selesai **/
 
 // Mulai urutan chat saat DOM siap
 document.addEventListener("DOMContentLoaded", function () {
@@ -618,12 +617,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Hide all chats on page load
-function hideAllChats() {
-  const chatBubbles = document.querySelectorAll(".hilang");
-  chatBubbles.forEach((bubble) => bubble.classList.add("hidden"));
-}
-
 function cleanAllChats() {
   const chatBubbles = document.querySelectorAll(".hilang");
   const tanggalSeptember = document.querySelectorAll(".tanggal-september");
@@ -637,7 +630,7 @@ function cleanAllChats() {
   september2.forEach((bubble) => bubble.classList.add("hidden"));
 }
 
-// Set chat time with checkmarks for right-side chats
+/*** Tampilan Waktu Pada Tiap Chat Mulai */
 function setChatTime(bubble, isReceived, manualTime) {
   const timeElement = bubble.querySelector("span");
   const timeString =
@@ -657,113 +650,24 @@ function setChatTime(bubble, isReceived, manualTime) {
     if (isReceived) {
       bubble.classList.add("with-check");
 
-      // Menunggu 3 detik sebelum mengubah warna ikon
       setTimeout(() => {
         const checkIcon = bubble.querySelector("#check-icon");
         if (checkIcon) {
-          checkIcon.style.color = "#4fb9e4"; // Mengubah warna menjadi cyan
+          checkIcon.style.color = "#4fb9e4";
         }
       }, 1000);
     }
   }
 }
 
-// Misalkan ini adalah chat bubble yang ingin kamu set waktu
-const chatBubbleLeft = document.getElementById("september-1"); // Bubble kiri
-const chatBubbleRight = document.getElementById("september-2"); // Bubble kanan
+const chatBubbleLeft = document.getElementById("september-1");
+const chatBubbleRight = document.getElementById("september-2");
 
-// Set waktu manual untuk chat bubble kiri
 setChatTime(chatBubbleLeft, false, "09:47");
-
-// Set waktu manual untuk chat bubble kanan
 setChatTime(chatBubbleRight, true, "10:02");
+/*** Tampilan Waktu Pada Tiap Chat Selesai */
 
-// Function for textarea auto resize
-function autoResize(textarea) {
-  textarea.style.height = "auto";
-  const maxHeight = 5 * 24; // 5 lines of text
-  if (textarea.scrollHeight <= maxHeight) {
-    textarea.style.height = textarea.scrollHeight + "px";
-  } else {
-    textarea.style.height = maxHeight + "px";
-  }
-
-  const cameraIcon = document.getElementById("cameraIcon");
-  const paperclipIcon = document.getElementById("paperclipIcon");
-  const micOrSendIcon = document.getElementById("micOrSendIcon");
-  const scrollToBottomIcon = document.getElementById("scrollToBottom");
-
-  if (textarea.value.length > 0) {
-    cameraIcon.style.display = "none";
-    // paperclipIcon.style.marginRight = "0";
-    micOrSendIcon.innerHTML = '<i class="fas fa-paper-plane text-white"></i>';
-  } else {
-    cameraIcon.style.display = "inline";
-    // paperclipIcon.style.marginRight = "0.5rem";
-    micOrSendIcon.innerHTML = '<i class="fas fa-microphone text-white"></i>';
-  }
-
-  // Update posisi ikon gulir
-  const textareaHeight = textarea.offsetHeight;
-  scrollToBottomIcon.style.bottom = `${50 + textareaHeight}px`;
-}
-
-const textarea = document.querySelector("textarea");
-textarea.addEventListener("input", function () {
-  autoResize(textarea);
-});
-
-const phoneNumber = "6281326561934"; // Ganti dengan nomor WhatsApp kamu
-
-document.getElementById("videoIcon").addEventListener("click", function () {
-  const message = "Aku mau vc kamu";
-  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
-    message
-  )}`;
-  window.open(whatsappLink, "_blank");
-});
-
-document.getElementById("phoneIcon").addEventListener("click", function () {
-  const message = "Aku mau teleponan sama kamu";
-  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
-    message
-  )}`;
-  window.open(whatsappLink, "_blank");
-});
-
-// document
-//   .getElementById("cameraIcon")
-//   .addEventListener("click", async function () {
-//     const popup = document.getElementById("cameraPopup");
-//     popup.classList.remove("hidden");
-
-//     const video = document.getElementById("video");
-//     try {
-//       const stream = await navigator.mediaDevices.getUserMedia({
-//         video: { facingMode: "user" },
-//       });
-//       video.srcObject = stream;
-//     } catch (error) {
-//       console.error("Error accessing camera: ", error);
-//     }
-//   });
-
-// // Pastikan untuk menutup popup jika klik di luar modal
-// window.addEventListener("click", function (event) {
-//   const popup = document.getElementById("cameraPopup");
-//   if (!popup.contains(event.target) && !event.target.matches("#cameraIcon")) {
-//     popup.classList.add("hidden");
-
-//     // Stop video stream when closing the popup
-//     const video = document.getElementById("video");
-//     const stream = video.srcObject;
-//     if (stream) {
-//       const tracks = stream.getTracks();
-//       tracks.forEach((track) => track.stop());
-//     }
-//   }
-// });
-
+/*** Tampilan Kamera Mulai ***/
 async function openCamera() {
   const cameraPopup = document.getElementById("cameraPopup");
   cameraPopup.classList.remove("hidden"); // Tampilkan popup kamera
@@ -782,13 +686,11 @@ async function openCamera() {
   popup.classList.add("hidden");
 }
 
-// Tambahkan event listener untuk kedua ikon
 document
   .getElementById("popupCameraIcon")
   .addEventListener("click", openCamera);
 document.getElementById("cameraIcon").addEventListener("click", openCamera);
 
-// Tutup popup ketika mengklik di luar
 window.addEventListener("click", function (event) {
   const cameraPopup = document.getElementById("cameraPopup");
   if (
@@ -798,7 +700,6 @@ window.addEventListener("click", function (event) {
   ) {
     cameraPopup.classList.add("hidden");
 
-    // Stop video stream ketika menutup popup
     const video = document.getElementById("video");
     const stream = video.srcObject;
     if (stream) {
@@ -807,3 +708,20 @@ window.addEventListener("click", function (event) {
     }
   }
 });
+/*** Tampilan Kamera Selesai ***/
+
+/*** Tampilan Attach File Mulai ***/
+document.getElementById("paperclipIcon").addEventListener("click", function () {
+  document.getElementById("popup").classList.toggle("hidden");
+});
+
+window.onclick = function (event) {
+  if (
+    event.target !== document.getElementById("paperclipIcon") &&
+    !event.target.closest("#popup") &&
+    !event.target.matches(".popup-item")
+  ) {
+    document.getElementById("popup").classList.add("hidden");
+  }
+};
+/*** Tampilan Attach File Selesai ***/
