@@ -108,9 +108,93 @@
               <i class="text-red-500 fab fa-youtube"></i>
             </div>
             <div class="flex items-center space-x-1">
-              <i class="text-putih fas fa-signal" style="font-size: 0.6rem"></i>
-              <i class="text-putih fas fa-wifi" style="font-size: 0.6rem"></i>
-              <i class="fas fa-battery-full"></i>
+              <!-- <i class="text-putih fas fa-signal" style="font-size: 0.6rem"></i> -->
+              <!-- <i class="text-putih fas fa-wifi" style="font-size: 0.6rem"></i> -->
+              <span
+                class="material-symbols-outlined text-putih text-xs mt-1 hidden"
+                id="signal1"
+              >
+                signal_cellular_alt_1_bar
+              </span>
+              <span
+                class="material-symbols-outlined text-putih text-xs mt-1 hidden"
+                id="signal2"
+              >
+                signal_cellular_alt_2_bar
+              </span>
+              <span
+                class="material-symbols-outlined text-putih text-xs mt-1"
+                id="signalFull"
+              >
+                signal_cellular_alt
+              </span>
+              <span
+                class="material-symbols-outlined text-xs mt-1 text-putih hidden"
+                id="wifi1"
+              >
+                wifi_1_bar
+              </span>
+              <span
+                class="material-symbols-outlined text-xs mt-1 text-putih hidden"
+                id="wifi2"
+              >
+                wifi_2_bar
+              </span>
+              <span
+                class="material-symbols-outlined text-xs mt-1 text-putih"
+                id="wifi3"
+              >
+                wifi
+              </span>
+              <span
+                class="material-symbols-outlined text-xs mt-1 text-putih hidden"
+                id="wifiOff"
+              >
+                wifi_off
+              </span>
+              <!-- <i class="fas fa-battery-full"></i> -->
+              <span
+                class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
+                id="battery-charging-full"
+              >
+                battery_charging_full
+              </span>
+              <span
+                class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
+                id="battery-charging-20"
+              >
+                battery_charging_20
+              </span>
+              <span
+                class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
+                id="battery-charging-50"
+              >
+                battery_charging_50
+              </span>
+              <span
+                class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
+                id="battery-charging-60"
+              >
+                battery_charging_60
+              </span>
+              <span
+                class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
+                id="battery-charging-80"
+              >
+                battery_charging_80
+              </span>
+              <span
+                class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
+                id="battery-charging-90"
+              >
+                battery_charging_90
+              </span>
+              <span
+                class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
+                id="battery-full"
+              >
+                battery_full
+              </span>
             </div>
           </div>
           <div
@@ -196,7 +280,7 @@
         <div class="p-4 overflow-y-auto flex-grow mt-16 mb-20">
           <div class="flex justify-center mb-4 mt-9 tanggal-september">
             <span
-              class="tanggal-hari teks-tanggal-hari text-xs py-1 px-2 rounded font-bold"
+              class="tanggal-hari teks-tanggal-hari text-xs py-1 px-2 rounded font-bold mt-4"
               >12 September 2024</span
             >
           </div>
@@ -374,10 +458,7 @@
             </div>
           </div>
         </div>
-        <div
-          class="p-3 ketik-pesan flex items-center fixed-bottom"
-          style="border-top: 2px solid #110303"
-        >
+        <div class="p-3 ketik-pesan flex items-center fixed-bottom">
           <div
             class="flex items-center textarea-ketik rounded-lg w-fufufafa md:w-full p-2"
           >

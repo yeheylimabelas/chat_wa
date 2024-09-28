@@ -9,6 +9,7 @@
   --bg-alert: #212e36;
   --bg-header: #121b22;
   --bg-ketik-pesan: #2a2f32;
+  --bg-ketik-pesan-border: #110303;
   --bg-textarea-ketik: #3b4a54;
   --bg-mic-send: #00a884;
   --bg-gulir: #283337;
@@ -16,6 +17,7 @@
   --bg-tanggal-hari: #212e36;
   --bg-teks-tanggal-hari: #9ca3af;
   --bg-fa-battery-full: #ecfccb;
+  --bg-animation-battery: #ecfccb;
   --bg-modal: #0b141b;
   --bg-button-pelajari: #21c063;
   --bg-title: #f9fcfc;
@@ -98,6 +100,7 @@ body {
 
 .ketik-pesan {
   background-color: var(--bg-ketik-pesan);
+  border-top: 2px solid var(--bg-ketik-pesan-border);
 }
 
 .textarea-ketik {
@@ -126,6 +129,9 @@ body {
 
 .fa-battery-full {
   color: var(--bg-fa-battery-full);
+}
+.animation-battery {
+  color: var(--bg-animation-battery);
 }
 /* body {
   margin: 0;
