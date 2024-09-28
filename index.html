@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="bg-image text-putih font-sans h-screen">
+    <!-- Start Audio -->
     <audio
       id="audioPlayer"
       src="./sound/bg_sound.mp3"
@@ -33,6 +34,9 @@
       preload="auto"
       loop
     ></audio>
+    <!-- End Audio -->
+
+    <!-- Start Modal Privasi -->
     <div id="modalPopup" class="modal hidden">
       <div class="line-scroll"></div>
       <div class="modal-content">
@@ -50,23 +54,23 @@
           hanya diketahui oleh Anda dan pengguna yang Anda pilih. Bahkan
           WhatsApp tidak dapat membaca atau mendengarkannya. Ini termasuk:
         </p>
-        <div class="list-item2">
+        <div class="list-item">
           <i class="fas fa-comments"></i>
           <span>Pesan teks dan suara</span>
         </div>
-        <div class="list-item2">
+        <div class="list-item">
           <i class="fas fa-phone"></i>
           <span>Panggilan suara dan video</span>
         </div>
-        <div class="list-item2">
+        <div class="list-item">
           <i class="fas fa-paperclip"></i>
           <span>Foto, video, dan dokumen</span>
         </div>
-        <div class="list-item2">
+        <div class="list-item">
           <i class="fas fa-map-marker-alt"></i>
           <span>Berbagi lokasi</span>
         </div>
-        <div <div class="list-item2">
+        <div <div class="list-item">
           <i class="fas fa-assistive-listening-systems"></i>
           <span>Pembaruan status </span>
         </div>
@@ -79,11 +83,14 @@
         </div>
       </div>
     </div>
+    <!-- End Modal Privasi -->
 
+    <!-- Start Content -->
     <div class="h-full flex flex-col">
       <div class="flex-grow flex flex-col">
+        <!-- Start All Header -->
         <div class="fixed-top">
-          <!-- ALERT -->
+          <!-- Start Alert -->
           <div
             id="alertWarning"
             class="hidden alert-warning text-yellow-700 p-2"
@@ -94,7 +101,9 @@
               Close
             </button>
           </div>
-          <!-- END ALERT -->
+          <!-- End ALert -->
+
+          <!-- Start Header -->
           <div
             class="flex items-center justify-between p-2 header text-xs text-gray-400"
           >
@@ -110,6 +119,7 @@
             <div class="flex items-center space-x-1">
               <!-- <i class="text-putih fas fa-signal" style="font-size: 0.6rem"></i> -->
               <!-- <i class="text-putih fas fa-wifi" style="font-size: 0.6rem"></i> -->
+              <!-- <i class="fas fa-battery-full"></i> -->
               <span
                 class="material-symbols-outlined text-putih text-xs mt-1 hidden"
                 id="signal1"
@@ -152,7 +162,6 @@
               >
                 wifi_off
               </span>
-              <!-- <i class="fas fa-battery-full"></i> -->
               <span
                 class="material-symbols-outlined text-base mt-1 text-putih hidden animation-battery"
                 id="battery-charging-full"
@@ -197,6 +206,8 @@
               </span>
             </div>
           </div>
+
+          <!-- Start Header Profil -->
           <div
             class="flex items-center justify-between p-4 header relative"
             style="border-bottom: 0.1px solid white"
@@ -276,7 +287,11 @@
               </div>
             </div>
           </div>
+          <!-- End Header Profil -->
         </div>
+        <!-- End All Header -->
+
+        <!-- Start Chat -->
         <div class="p-4 overflow-y-auto flex-grow mt-16 mb-20">
           <div class="flex justify-center mb-4 mt-9 tanggal-september">
             <span
@@ -284,6 +299,8 @@
               >12 September 2024</span
             >
           </div>
+
+          <!-- Start Pesan dan Panggilan -->
           <div class="flex justify-center mb-4">
             <div
               class="peringatan text-gray-400 text-sm p-3 rounded-lg max-w-xs md:max-w-md lg:max-w-lg text-center"
@@ -299,6 +316,9 @@
               </div>
             </div>
           </div>
+          <!-- End Pesan dan Panggilan -->
+
+          <!-- Start Chat 1 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left text-putih max-w-xs chat-time september-1"
@@ -309,6 +329,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Chat 1 -->
+
+          <!-- Start Chat 2 -->
           <div class="flex justify-end mb-4">
             <div
               class="chat-bubble chat-bubble-right text-putih max-w-xs chat-time with-check september-2"
@@ -319,12 +342,16 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Chat 2 -->
+
           <div class="flex justify-center mb-4 mt-9">
             <span
               class="tanggal-hari teks-tanggal-hari text-xs py-1 px-2 rounded font-bold hari-ini"
               >Hari ini</span
             >
           </div>
+
+          <!-- Start Sequence 1 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-1"
@@ -335,6 +362,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 1 -->
+
+          <!-- Start Sequence 2 -->
           <div class="flex justify-end mb-4">
             <div
               class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-2"
@@ -345,6 +375,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 2 -->
+
+          <!-- Start Sequence 3 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-3"
@@ -356,6 +389,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 3 -->
+
+          <!-- Start Sequence 4 -->
           <div class="flex justify-end mb-4">
             <div
               class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-4"
@@ -366,17 +402,22 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 4 -->
+
+          <!-- Start Sequence 5 -->
           <div class="flex justify-end mb-4">
             <div
               class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-5"
               data-time="1"
               id="sequence-5"
             >
-              <p>Tumben mas ngechat</p>
-              <p>Ada perihal apa ya??</p>
+              <p>Tumben mas ngechat<br />Ada perihal apa ya??</p>
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 5 -->
+
+          <!-- Start Sequence 6 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-6"
@@ -387,6 +428,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 6 -->
+
+          <!-- Start Sequence 7 -->
           <div class="flex justify-end mb-4">
             <div
               class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-7"
@@ -397,6 +441,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 7 -->
+
+          <!-- Start Sequence 8 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-8"
@@ -407,6 +454,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 8 -->
+
+          <!-- Start Sequence 9 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-9"
@@ -417,6 +467,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 9 -->
+
+          <!-- Start Sequence 10 -->
           <div class="flex justify-end mb-4">
             <div
               class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-10"
@@ -427,6 +480,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 10 -->
+
+          <!-- Start Sequence 11 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-11"
@@ -437,6 +493,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 11 -->
+
+          <!-- Start Sequence 12 -->
           <div class="flex justify-end mb-4">
             <div
               class="chat-bubble chat-bubble-right hilang text-putih max-w-xs chat-time with-check sequence-12"
@@ -447,6 +506,9 @@
               <span class="text-xs text-gray-400 block text-right"></span>
             </div>
           </div>
+          <!-- End Sequence 12 -->
+
+          <!-- Start Sequence 13 -->
           <div class="flex justify-start mb-4">
             <div
               class="chat-bubble chat-bubble-left hilang text-putih max-w-xs chat-time sequence-13"
@@ -458,6 +520,9 @@
             </div>
           </div>
         </div>
+        <!-- End Chat -->
+
+        <!-- Start Input Text -->
         <div class="p-3 ketik-pesan flex items-center fixed-bottom">
           <div
             class="flex items-center textarea-ketik rounded-lg w-fufufafa md:w-full p-2"
@@ -497,8 +562,11 @@
             </div>
           </div>
         </div>
+        <!-- End Input Text -->
       </div>
     </div>
+
+    <!-- Icon Scroll -->
     <span
       class="material-symbols-outlined rounded-full w-8 h-8 flex items-center justify-center gulir mr-4 text-base cursor-pointer"
       id="scrollToBottom"
@@ -506,6 +574,8 @@
     >
       keyboard_double_arrow_down
     </span>
+    <!-- End Icon Scroll -->
+
     <!-- <i
       class="fas fa-angle-double-down rounded-full w-8 h-8 flex items-center justify-center gulir mr-4"
       id="scrollToBottom"
@@ -518,6 +588,8 @@
         font-size: 0.6rem;
       "
     ></i> -->
+
+    <!-- Start Attach File -->
     <div id="popup" class="popup hidden">
       <div class="popup-content">
         <div class="popup-grid">
@@ -578,15 +650,15 @@
         </div>
       </div>
     </div>
+    <!-- End Attach File -->
 
-    <!-- Popup Modal -->
+    <!-- Start Popup Modal Camera -->
     <div id="cameraPopup" class="modal-camera hidden">
       <div class="modal-camera-content">
-        <!-- <span id="closeModal" class="close-button">&times;</span> -->
         <video id="video" autoplay playsinline></video>
       </div>
     </div>
-    <!-- End Popup Modal -->
+    <!-- End Popup Modal Camera -->
 
     <script src="script.js"></script>
   </body>
