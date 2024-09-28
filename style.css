@@ -20,6 +20,8 @@
   --bg-button-pelajari: #21c063;
   --bg-title: #f9fcfc;
   --bg-lock-icon: #f9fcfc;
+  --bg-dropdown-menu: #2a2f32;
+  --bg-dropdown-menu-hover: #3b4a54;
   --bg-image-dark: url("img/bg_gelap.jpeg");
   --bg-image-light: url("img/bg_terang.jpeg");
   --bubble-after-left: linear-gradient(
@@ -39,6 +41,9 @@
 }
 
 body {
+  /* font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300; */
   background-color: var(--bg-dark);
   color: var(--text-putih);
 }
@@ -207,8 +212,8 @@ body {
   position: absolute;
   right: 0;
   top: 100%;
-  background-color: #2a2f32;
-  color: white;
+  background-color: var(--bg-dropdown-menu);
+  color: var(--bg-title);
   border-radius: 5px;
   overflow: hidden;
   z-index: 20;
@@ -222,10 +227,10 @@ body {
   align-items: center;
   padding: 10px 20px;
   text-decoration: none;
-  color: white;
+  color: var(--bg-title);
 }
 .dropdown-menu a:hover {
-  background-color: #3b4a54;
+  background-color: var(--bg-dropdown-menu-hover);
 }
 .dropdown-menu .more::after {
   content: "\f0da";
@@ -243,7 +248,7 @@ textarea {
   bottom: 100px; /* Jarak dari area input pesan */
   left: 50%;
   transform: translateX(-50%);
-  background: #121b22;
+  background: var(--bg-header);
   border-radius: 10px;
   padding: 10px;
   display: flex;
@@ -348,7 +353,6 @@ textarea {
   margin-left: 10px;
   background: none;
   border: none;
-  cursor: pointer;
   font-weight: bold;
 }
 
@@ -385,7 +389,6 @@ textarea {
   left: 10px;
   font-size: 1.5rem;
   color: var(--bg-title); /* Warna tombol close */
-  cursor: pointer;
 }
 
 .title {

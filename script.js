@@ -56,7 +56,7 @@ function toggleMode() {
       "#626261"
     );
     document.documentElement.style.setProperty("--bg-header", "#fff");
-    document.documentElement.style.setProperty("--bg-ketik-pesan", "#adb5ba");
+    document.documentElement.style.setProperty("--bg-ketik-pesan", "#dde4e8");
     document.documentElement.style.setProperty("--bg-textarea-ketik", "#fff");
     document.documentElement.style.setProperty("--bg-mic-send", "#1dab61");
     document.documentElement.style.setProperty("--bg-gulir", "#fafaf8");
@@ -64,6 +64,11 @@ function toggleMode() {
     document.documentElement.style.setProperty("--bg-modal", "#ffffff");
     document.documentElement.style.setProperty("--bg-title", "#000");
     document.documentElement.style.setProperty("--bg-lock-icon", "#25d367");
+    document.documentElement.style.setProperty("--bg-dropdown-menu", "#fff");
+    document.documentElement.style.setProperty(
+      "--bg-dropdown-menu-hover",
+      "#dde4e8"
+    );
     document.documentElement.style.setProperty(
       "--bg-modal-pelajaari",
       "#1dab61"
@@ -117,6 +122,11 @@ function toggleMode() {
     document.documentElement.style.setProperty("--bg-modal", "#0b141b");
     document.documentElement.style.setProperty("--bg-title", "#0b141b");
     document.documentElement.style.setProperty("--bg-lock-icon", "#f9fcfc");
+    document.documentElement.style.setProperty("--bg-dropdown-menu", "#2a2f32");
+    document.documentElement.style.setProperty(
+      "--bg-dropdown-menu-hover",
+      "#3b4a54"
+    );
     document.documentElement.style.setProperty(
       "--bg-modal-pelajaari",
       "#21c063"
@@ -545,7 +555,8 @@ function setChatTime(bubble, isReceived, manualTime) {
   if (timeElement) {
     timeElement.innerHTML = `${timeString} ${
       isReceived
-        ? '<i class="fas fa-check-double" style="font-size: 0.6rem;" id="check-icon"></i>'
+        ? // ? '<i class="fas fa-check-double" style="font-size: 0.6rem;" id="check-icon"></i>'
+          '<span class="material-symbols-outlined align-top	" style="font-size: 1.1rem;" id="check-icon">done_all</span>'
         : ""
     }`;
 
@@ -606,4 +617,22 @@ function autoResize(textarea) {
 const textarea = document.querySelector("textarea");
 textarea.addEventListener("input", function () {
   autoResize(textarea);
+});
+
+const phoneNumber = "6281326561934"; // Ganti dengan nomor WhatsApp kamu
+
+document.getElementById("videoIcon").addEventListener("click", function () {
+  const message = "Aku mau vc kamu";
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappLink, "_blank");
+});
+
+document.getElementById("phoneIcon").addEventListener("click", function () {
+  const message = "Aku mau teleponan sama kamu";
+  const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappLink, "_blank");
 });
