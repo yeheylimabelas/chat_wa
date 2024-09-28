@@ -601,11 +601,11 @@ function autoResize(textarea) {
 
   if (textarea.value.length > 0) {
     cameraIcon.style.display = "none";
-    paperclipIcon.style.marginRight = "0";
+    // paperclipIcon.style.marginRight = "0";
     micOrSendIcon.innerHTML = '<i class="fas fa-paper-plane text-white"></i>';
   } else {
     cameraIcon.style.display = "inline";
-    paperclipIcon.style.marginRight = "0.5rem";
+    // paperclipIcon.style.marginRight = "0.5rem";
     micOrSendIcon.innerHTML = '<i class="fas fa-microphone text-white"></i>';
   }
 
@@ -635,4 +635,81 @@ document.getElementById("phoneIcon").addEventListener("click", function () {
     message
   )}`;
   window.open(whatsappLink, "_blank");
+});
+
+// document
+//   .getElementById("cameraIcon")
+//   .addEventListener("click", async function () {
+//     const popup = document.getElementById("cameraPopup");
+//     popup.classList.remove("hidden");
+
+//     const video = document.getElementById("video");
+//     try {
+//       const stream = await navigator.mediaDevices.getUserMedia({
+//         video: { facingMode: "user" },
+//       });
+//       video.srcObject = stream;
+//     } catch (error) {
+//       console.error("Error accessing camera: ", error);
+//     }
+//   });
+
+// // Pastikan untuk menutup popup jika klik di luar modal
+// window.addEventListener("click", function (event) {
+//   const popup = document.getElementById("cameraPopup");
+//   if (!popup.contains(event.target) && !event.target.matches("#cameraIcon")) {
+//     popup.classList.add("hidden");
+
+//     // Stop video stream when closing the popup
+//     const video = document.getElementById("video");
+//     const stream = video.srcObject;
+//     if (stream) {
+//       const tracks = stream.getTracks();
+//       tracks.forEach((track) => track.stop());
+//     }
+//   }
+// });
+
+async function openCamera() {
+  const cameraPopup = document.getElementById("cameraPopup");
+  cameraPopup.classList.remove("hidden"); // Tampilkan popup kamera
+
+  const video = document.getElementById("video");
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user" },
+    });
+    video.srcObject = stream;
+  } catch (error) {
+    console.error("Error accessing camera: ", error);
+  }
+  // Sembunyikan popup item setelah mengklik ikon kamera
+  const popup = document.getElementById("popup");
+  popup.classList.add("hidden");
+}
+
+// Tambahkan event listener untuk kedua ikon
+document
+  .getElementById("popupCameraIcon")
+  .addEventListener("click", openCamera);
+document.getElementById("cameraIcon").addEventListener("click", openCamera);
+
+// Tutup popup ketika mengklik di luar
+window.addEventListener("click", function (event) {
+  const cameraPopup = document.getElementById("cameraPopup");
+  if (
+    !cameraPopup.contains(event.target) &&
+    !event.target.matches("#popupCameraIcon") &&
+    !event.target.matches("#cameraIcon")
+  ) {
+    cameraPopup.classList.add("hidden");
+
+    // Stop video stream ketika menutup popup
+    const video = document.getElementById("video");
+    const stream = video.srcObject;
+    if (stream) {
+      const tracks = stream.getTracks();
+      tracks.forEach((track) => track.stop());
+    }
+  }
 });
