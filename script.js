@@ -459,7 +459,6 @@ function autoResize(textarea) {
   }
 
   const cameraIcon = document.getElementById("cameraIcon");
-  const paperclipIcon = document.getElementById("paperclipIcon");
   const micOrSendIcon = document.getElementById("micOrSendIcon");
   const scrollToBottomIcon = document.getElementById("scrollToBottom");
 
@@ -479,24 +478,6 @@ const textarea = document.querySelector("textarea");
 textarea.addEventListener("input", function () {
   autoResize(textarea);
 });
-
-const chatSequence = [
-  { id: "sequence-1", delay: 2000 },
-  { id: "sequence-2", delay: 1000 },
-  { id: "sequence-3", delay: 1000 },
-  { id: "sequence-4", delay: 1000 },
-  { id: "sequence-5", delay: 400 },
-  { id: "sequence-6", delay: 1000 },
-  { id: "sequence-7", delay: 1000 },
-  { id: "sequence-8", delay: 1000 },
-  { id: "sequence-9", delay: 1000 },
-  { id: "sequence-10", delay: 1000 },
-  { id: "sequence-11", delay: 1000 },
-  { id: "sequence-12", delay: 1000 },
-  { id: "sequence-13", delay: 1000 },
-];
-
-let currentSequenceIndex = 0;
 
 function playSound(isRightBubble) {
   const audio = new Audio(
@@ -539,67 +520,58 @@ function typeWriter(textarea, text, index, callback) {
   }
 }
 
+let currentSequenceIndex = 0;
+
 function startChatSequence() {
-  if (currentSequenceIndex < chatSequence.length) {
-    const { id, delay } = chatSequence[currentSequenceIndex];
+  const chatBubbles = document.querySelectorAll(".chat-bubble");
 
-    setTimeout(() => {
-      if ([1, 3, 6, 8, 9, 11, 13].includes(currentSequenceIndex + 1)) {
-        // Sequence ini muncul otomatis
-        showChatBubble(
-          id,
-          id.includes("sequence-2") || id.includes("sequence-4")
-        );
-        currentSequenceIndex++;
-        startChatSequence(); // Panggil fungsi ini lagi untuk melanjutkan sequence
-      } else {
-        // Sequence ini memerlukan input dari pengguna
-        const textarea = document.querySelector("textarea");
-        textarea.value = "";
+  while (currentSequenceIndex < chatBubbles.length) {
+    const chatBubble = chatBubbles[currentSequenceIndex];
+    const delay = parseInt(chatBubble.getAttribute("data-time")) * 1000;
 
-        toggleMicSendIcon(true);
+    if (chatBubble.classList.contains("is-date-manual-false")) {
+      setTimeout(() => {
+        const isLeftTrue = chatBubble.classList.contains("is-left-true");
 
-        // if (id === "sequence-2") {
-        //   textarea.value = "Waalaikumsalam mas";
-        // } else if (id === "sequence-4") {
-        //   textarea.value = "Iyaa sehat2 aja kok mas";
-        // } else if (id === "sequence-5") {
-        //   textarea.value = "Tumben mas ngechat \nAda perihal apa ya?";
-        // } else if (id === "sequence-7") {
-        //   textarea.value = "Iyaa dong mas biar gak kelamaan";
-        // } else if (id === "sequence-10") {
-        //   textarea.value = "Kita adalah manusia";
-        // } else if (id === "sequence-12") {
-        //   textarea.value = "Ohhh hablum minan nas";
-        // }
+        if (isLeftTrue) {
+          showChatBubble(chatBubble.id, false);
+          currentSequenceIndex++;
+          startChatSequence();
+        } else {
+          const textarea = document.querySelector("textarea");
+          textarea.value = "";
 
-        const messageElement = document.getElementById(id);
-        const pElement = messageElement
-          ? messageElement.querySelector("p")
-          : null;
-        if (pElement) {
-          textarea.value = pElement.innerHTML.replace(/<br\s*\/?>/g, "\n");
-        }
+          toggleMicSendIcon(true);
 
-        autoResize(textarea);
-
-        document.getElementById("micOrSendIcon").onclick = function () {
-          if (textarea.value.trim() !== "") {
-            showChatBubble(id, true);
-            currentSequenceIndex++;
-            toggleMicSendIcon(true);
-            setTimeout(() => {
-              toggleMicSendIcon(false);
-              startChatSequence();
-            }, delay);
-            textarea.value = "";
-            autoResize(textarea);
+          const pElement = chatBubble.querySelector("p");
+          if (pElement) {
+            textarea.value = pElement.innerHTML.replace(/<br\s*\/?>/g, "\n");
           }
-        };
-      }
-    }, delay);
+
+          autoResize(textarea);
+
+          document.getElementById("micOrSendIcon").onclick = function () {
+            if (textarea.value.trim() !== "") {
+              showChatBubble(chatBubble.id, true);
+              currentSequenceIndex++;
+              toggleMicSendIcon(true);
+              setTimeout(() => {
+                toggleMicSendIcon(false);
+                startChatSequence();
+              }, delay);
+              textarea.value = "";
+              autoResize(textarea);
+            }
+          };
+        }
+      }, delay);
+      break;
+    }
+
+    currentSequenceIndex++;
   }
 }
+
 /*** Tampilan Chat Dimulai Selesai **/
 
 // Mulai urutan chat saat DOM siap
@@ -619,10 +591,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function cleanAllChats() {
   const chatBubbles = document.querySelectorAll(".hilang");
-  const tanggalSeptember = document.querySelectorAll(".tanggal-september");
+  const tanggalSeptember = document.querySelectorAll(".is-date-manual-true");
   const peringatan = document.querySelectorAll(".peringatan");
-  const september1 = document.querySelectorAll(".september-1");
-  const september2 = document.querySelectorAll(".september-2");
+  const september1 = document.querySelectorAll(".sequence-1");
+  const september2 = document.querySelectorAll(".sequence-2");
   chatBubbles.forEach((bubble) => bubble.classList.add("hidden"));
   tanggalSeptember.forEach((bubble) => bubble.classList.add("hidden"));
   peringatan.forEach((bubble) => bubble.classList.add("hidden"));
@@ -660,8 +632,8 @@ function setChatTime(bubble, isReceived, manualTime) {
   }
 }
 
-const chatBubbleLeft = document.getElementById("september-1");
-const chatBubbleRight = document.getElementById("september-2");
+const chatBubbleLeft = document.getElementById("sequence-1");
+const chatBubbleRight = document.getElementById("sequence-2");
 
 setChatTime(chatBubbleLeft, false, "09:47");
 setChatTime(chatBubbleRight, true, "10:02");

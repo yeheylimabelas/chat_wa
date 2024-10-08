@@ -75,11 +75,11 @@ body {
   border-radius: 10px;
 }
 
-.chat-bubble-left {
+.is-left-true {
   background-color: var(--bg-bubble-left);
 }
 
-.chat-bubble-right {
+.is-left-false {
   background-color: var(--bg-bubble-right);
 }
 
@@ -91,12 +91,12 @@ body {
   height: 20px;
 }
 
-.chat-bubble-left::after {
+.is-left-true::after {
   left: -10px;
   background: var(--bubble-after-left);
 }
 
-.chat-bubble-right::after {
+.is-left-false::after {
   right: -10px;
   background: var(--bubble-after-right);
 }
